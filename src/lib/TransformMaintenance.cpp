@@ -79,9 +79,17 @@ void TransformMaintenance::laserOdometryHandler(const nav_msgs::Odometry::ConstP
    geoQuat = tf::createQuaternionMsgFromRollPitchYaw(transformMapped()[2], -transformMapped()[0], -transformMapped()[1]);
 
    _laserOdometry2.header.stamp = laserOdometry->header.stamp;
+   /*
    _laserOdometry2.pose.pose.orientation.x = -geoQuat.y;
    _laserOdometry2.pose.pose.orientation.y = -geoQuat.z;
    _laserOdometry2.pose.pose.orientation.z = geoQuat.x;
+   */
+
+   _laserOdometry2.pose.pose.orientation.x = geoQuat.x;
+   _laserOdometry2.pose.pose.orientation.y = geoQuat.y;
+   _laserOdometry2.pose.pose.orientation.z = geoQuat.z;
+
+
    _laserOdometry2.pose.pose.orientation.w = geoQuat.w;
    _laserOdometry2.pose.pose.position.x = transformMapped()[3];
    _laserOdometry2.pose.pose.position.y = transformMapped()[4];
@@ -89,7 +97,9 @@ void TransformMaintenance::laserOdometryHandler(const nav_msgs::Odometry::ConstP
    _pubLaserOdometry2.publish(_laserOdometry2);
 
    _laserOdometryTrans2.stamp_ = laserOdometry->header.stamp;
-   _laserOdometryTrans2.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
+    //_laserOdometryTrans2.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
+    _laserOdometryTrans2.setRotation(tf::Quaternion(geoQuat.x, geoQuat.y, geoQuat.z, geoQuat.w));
+
    _laserOdometryTrans2.setOrigin(tf::Vector3(transformMapped()[3], transformMapped()[4], transformMapped()[5]));
    _tfBroadcaster2.sendTransform(_laserOdometryTrans2);
 }

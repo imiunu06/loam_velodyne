@@ -287,9 +287,16 @@ void LaserMapping::publishResult()
    (transformAftMapped().rot_z.rad(), -transformAftMapped().rot_x.rad(), -transformAftMapped().rot_y.rad());
 
    _odomAftMapped.header.stamp = _timeLaserOdometry;
+   /*
    _odomAftMapped.pose.pose.orientation.x = -geoQuat.y;
    _odomAftMapped.pose.pose.orientation.y = -geoQuat.z;
    _odomAftMapped.pose.pose.orientation.z = geoQuat.x;
+   */
+   _odomAftMapped.pose.pose.orientation.x = geoQuat.x;
+   _odomAftMapped.pose.pose.orientation.y = geoQuat.y;
+   _odomAftMapped.pose.pose.orientation.z = geoQuat.z;
+
+
    _odomAftMapped.pose.pose.orientation.w = geoQuat.w;
    _odomAftMapped.pose.pose.position.x = transformAftMapped().pos.x();
    _odomAftMapped.pose.pose.position.y = transformAftMapped().pos.y();
@@ -303,7 +310,10 @@ void LaserMapping::publishResult()
    _pubOdomAftMapped.publish(_odomAftMapped);
 
    _aftMappedTrans.stamp_ = _timeLaserOdometry;
-   _aftMappedTrans.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
+   // _aftMappedTrans.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
+   _aftMappedTrans.setRotation(tf::Quaternion(geoQuat.x, geoQuat.y, geoQuat.z, geoQuat.w));
+
+
    _aftMappedTrans.setOrigin(tf::Vector3(transformAftMapped().pos.x(),
                                          transformAftMapped().pos.y(),
                                          transformAftMapped().pos.z()));

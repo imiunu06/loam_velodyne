@@ -16,7 +16,7 @@ find_package(PCL REQUIRED)
 
 include_directories(
   include
-	${catkin_INCLUDE_DIRS} 
+	${catkin_INCLUDE_DIRS}
 	#${EIGEN3_INCLUDE_DIR}
 	${PCL_INCLUDE_DIRS})
 
@@ -49,6 +49,10 @@ target_link_libraries(laserMapping ${catkin_LIBRARIES} ${PCL_LIBRARIES} loam )
 add_executable(transformMaintenance src/transform_maintenance_node.cpp)
 target_link_libraries(transformMaintenance ${catkin_LIBRARIES} ${PCL_LIBRARIES} loam )
 
+add_executable(topic_tf_listener src/tf_listener_node.cpp)
+target_link_libraries(topic_tf_listener ${catkin_LIBRARIES} ${PCL_LIBRARIES} loam )
+
+
 if (CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   # TODO: Download test data
@@ -68,5 +72,3 @@ if (CATKIN_ENABLE_TESTING)
       laserMapping
       transformMaintenance)
 endif()
-
-

@@ -21,6 +21,9 @@
   <node pkg="loam_velodyne" type="transformMaintenance" name="transformMaintenance" output="screen">
   </node>
 
+  <node pkg="loam_velodyne" type="topic_tf_listener" name="topic_tf_listener" output="screen">
+  </node>
+
   <group if="$(arg rviz)">
     <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find loam_velodyne)/rviz_cfg/loam_velodyne.rviz" />
   </group>

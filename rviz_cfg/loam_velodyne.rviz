@@ -85,7 +85,7 @@ Visualization Manager:
       Color: 255; 25; 0
       Enabled: true
       Keep: 100
-      Length: 1
+      Length: 0.5
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /integrated_to_init
@@ -195,7 +195,7 @@ Visualization Manager:
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: -1.5698
-      Target Frame: aft_mapped
+      Target Frame: camera_init
       Value: ThirdPersonFollower (rviz)
       Yaw: 4.29039
     Saved: ~

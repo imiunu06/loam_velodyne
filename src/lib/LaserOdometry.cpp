@@ -302,9 +302,15 @@ namespace loam
                                                                                -transformSum().rot_y.rad());
 
     _laserOdometryMsg.header.stamp            = _timeSurfPointsLessFlat;
+    /*
     _laserOdometryMsg.pose.pose.orientation.x = -geoQuat.y;
     _laserOdometryMsg.pose.pose.orientation.y = -geoQuat.z;
     _laserOdometryMsg.pose.pose.orientation.z = geoQuat.x;
+    */
+    _laserOdometryMsg.pose.pose.orientation.x = geoQuat.x;
+    _laserOdometryMsg.pose.pose.orientation.y = geoQuat.y;
+    _laserOdometryMsg.pose.pose.orientation.z = geoQuat.z;
+
     _laserOdometryMsg.pose.pose.orientation.w = geoQuat.w;
     _laserOdometryMsg.pose.pose.position.x    = transformSum().pos.x();
     _laserOdometryMsg.pose.pose.position.y    = transformSum().pos.y();
@@ -312,7 +318,7 @@ namespace loam
     _pubLaserOdometry.publish(_laserOdometryMsg);
 
     _laserOdometryTrans.stamp_ = _timeSurfPointsLessFlat;
-    _laserOdometryTrans.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
+    _laserOdometryTrans.setRotation(tf::Quaternion(geoQuat.x, geoQuat.y, geoQuat.z, geoQuat.w));
     _laserOdometryTrans.setOrigin(tf::Vector3(transformSum().pos.x(), transformSum().pos.y(), transformSum().pos.z()));
     _tfBroadcaster.sendTransform(_laserOdometryTrans);
 
