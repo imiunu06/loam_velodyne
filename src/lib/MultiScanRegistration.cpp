@@ -179,9 +179,9 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
 
   // extract valid points from input cloud
   for (int i = 0; i < cloudSize; i++) {
-    point.x = laserCloudIn[i].y;
-    point.y = laserCloudIn[i].z;
-    point.z = laserCloudIn[i].x;
+    point.x = laserCloudIn[i].x;
+    point.y = laserCloudIn[i].y;
+    point.z = laserCloudIn[i].z;
 
     // skip NaN and INF valued points
     if (!pcl_isfinite(point.x) ||
@@ -196,14 +196,15 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
     }
 
     // calculate vertical point angle and scan ID
-    float angle = std::atan(point.y / std::sqrt(point.x * point.x + point.z * point.z));
+    float angle = std::atan(point.z / std::sqrt(point.x * point.x + point.y * point.y));
     int scanID = _scanMapper.getRingForAngle(angle);
     if (scanID >= _scanMapper.getNumberOfScanRings() || scanID < 0 ){
       continue;
     }
 
     // calculate horizontal point angle
-    float ori = -std::atan2(point.x, point.z);
+    float ori = std::atan2(point.x, point.y);
+    //
     if (!halfPassed) {
       if (ori < startOri - M_PI / 2) {
         ori += 2 * M_PI;
@@ -223,7 +224,7 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
         ori -= 2 * M_PI;
       }
     }
-
+    //
     // calculate relative scan time based on point orientation
     float relTime = config().scanPeriod * (ori - startOri) / (endOri - startOri);
     point.intensity = scanID + relTime;
