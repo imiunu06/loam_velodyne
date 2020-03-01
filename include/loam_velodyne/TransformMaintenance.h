@@ -72,6 +72,11 @@ private:
   nav_msgs::Odometry _laserOdometry2;         ///< latest integrated laser odometry message
   tf::StampedTransform _laserOdometryTrans2;  ///< latest integrated laser odometry transformation
 
+  // for tie up mat with camera_init
+  tf::StampedTransform  map_to_camera_init;
+  tf::TransformBroadcaster tfBroadcasterMapToCameraInit;
+
+
   ros::Publisher _pubLaserOdometry2;          ///< integrated laser odometry publisher
   tf::TransformBroadcaster _tfBroadcaster2;   ///< integrated laser odometry transformation broadcaster
 

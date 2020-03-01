@@ -43,6 +43,12 @@ TransformMaintenance::TransformMaintenance()
 
    _laserOdometryTrans2.frame_id_ = "/camera_init";
    _laserOdometryTrans2.child_frame_id_ = "/camera";
+
+    //
+    map_to_camera_init.frame_id_ = "/map";
+    map_to_camera_init.child_frame_id_ = "/camera_init";
+
+
 }
 
 
@@ -92,6 +98,15 @@ void TransformMaintenance::laserOdometryHandler(const nav_msgs::Odometry::ConstP
    _laserOdometryTrans2.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
    _laserOdometryTrans2.setOrigin(tf::Vector3(transformMapped()[3], transformMapped()[4], transformMapped()[5]));
    _tfBroadcaster2.sendTransform(_laserOdometryTrans2);
+
+   // jw
+   tf::Quaternion Quat_map;
+   Quat_map.setRPY(90*M_PI/180,0,90*M_PI/180);
+
+   map_to_camera_init.stamp_ = laserOdometry->header.stamp;
+   map_to_camera_init.setRotation(Quat_map);
+   map_to_camera_init.setOrigin(tf::Vector3(0, 0, 0));
+   tfBroadcasterMapToCameraInit.sendTransform(map_to_camera_init);
 }
 
 void TransformMaintenance::odomAftMappedHandler(const nav_msgs::Odometry::ConstPtr& odomAftMapped)
