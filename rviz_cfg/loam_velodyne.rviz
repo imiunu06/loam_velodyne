@@ -197,7 +197,8 @@ Visualization Manager:
       Pitch: -1.5698
       Target Frame: aft_mapped
       Value: ThirdPersonFollower (rviz)
-      Yaw: 4.29039
+      Yaw: 3,2
+      Pitch: 0.45
     Saved: ~
 Window Geometry:
   Displays:

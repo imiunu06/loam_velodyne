@@ -101,7 +101,7 @@ void TransformMaintenance::laserOdometryHandler(const nav_msgs::Odometry::ConstP
 
    // jw
    tf::Quaternion Quat_map;
-   Quat_map.setRPY(90*M_PI/180,0,90*M_PI/180);
+   Quat_map.setRPY(90*M_PI/180,0,-90*M_PI/180);
 
    map_to_camera_init.stamp_ = laserOdometry->header.stamp;
    map_to_camera_init.setRotation(Quat_map);

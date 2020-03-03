@@ -205,10 +205,20 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
     // calculate horizontal point angle
     float ori = -std::atan2(point.x, point.z);
 
-    //
+    // for using to skip the data of persons who pushing the cart.
+    // using Degree not radian
     float oriangle = std::atan2(point.z,point.x)*180/M_PI;
-    if(oriangle <= -75 && oriangle >= -105)
-      continue;
+    float heightangle = std::atan(point.y / std::sqrt(point.x * point.x + point.z * point.z));
+    heightangle = heightangle*180/M_PI;
+    if(oriangle <= -60 && oriangle >= -120){
+      if(heightangle <=10 && heightangle >= -10)
+        continue;
+    }
+
+    //
+
+
+
 
     if (!halfPassed) {
       if (ori < startOri - M_PI / 2) {
