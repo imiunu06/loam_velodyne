@@ -142,7 +142,7 @@ bool MultiScanRegistration::setupROS(ros::NodeHandle& node, ros::NodeHandle& pri
 
 void MultiScanRegistration::handleCloudMessage(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg)
 {
-  if (_systemDelay > 0) 
+  if (_systemDelay > 0)
   {
     --_systemDelay;
     return;
@@ -175,7 +175,7 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
   pcl::PointXYZI point;
   _laserCloudScans.resize(_scanMapper.getNumberOfScanRings());
   // clear all scanline points
-  std::for_each(_laserCloudScans.begin(), _laserCloudScans.end(), [](auto&&v) {v.clear(); }); 
+  std::for_each(_laserCloudScans.begin(), _laserCloudScans.end(), [](auto&&v) {v.clear(); });
 
   // extract valid points from input cloud
   for (int i = 0; i < cloudSize; i++) {
@@ -201,6 +201,12 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
     if (scanID >= _scanMapper.getNumberOfScanRings() || scanID < 0 ){
       continue;
     }
+
+
+    // jw cut the data of the person
+    float angleCut = std::atan2(point.z, point.x)*180/M_PI;
+    if(angleCut <= -60 && angleCut >= -120)
+      continue;
 
     // calculate horizontal point angle
     float ori = -std::atan2(point.x, point.z);

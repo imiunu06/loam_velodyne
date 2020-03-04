@@ -40,7 +40,8 @@ namespace loam
       const int& curvatureRegion_ = 5,
       const int& maxCornerSharp_ = 2,
       const int& maxSurfaceFlat_ = 4,
-      const float& lessFlatFilterSize_ = 0.2,
+      //const float& lessFlatFilterSize_ = 0.2,
+      const float& lessFlatFilterSize_ = 0.05,
       const float& surfaceCurvatureThreshold_ = 0.1);
 
     /** The time per scan. */
@@ -141,7 +142,7 @@ namespace loam
     */
     void processScanlines(const Time& scanTime, std::vector<pcl::PointCloud<pcl::PointXYZI>> const& laserCloudScans);
 
-    bool configure(const RegistrationParams& config = RegistrationParams()); 
+    bool configure(const RegistrationParams& config = RegistrationParams());
 
     /** \brief Update new IMU state. NOTE: MUTATES ARGS! */
     void updateIMUData(Vector3& acc, IMUState& newState);
@@ -256,4 +257,3 @@ namespace loam
   };
 
 }
-
