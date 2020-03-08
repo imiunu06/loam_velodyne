@@ -63,6 +63,7 @@ Visualization Manager:
           Value: true
         camera_init:
           Value: true
+          Orientation: 3.14/2; 0; 0; ;
         laser_odom:
           Value: true
       Marker Scale: 1

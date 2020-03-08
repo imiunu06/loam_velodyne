@@ -40,7 +40,7 @@ namespace loam {
 
 
 
-bool ScanRegistration::parseParams(const ros::NodeHandle& nh, RegistrationParams& config_out) 
+bool ScanRegistration::parseParams(const ros::NodeHandle& nh, RegistrationParams& config_out)
 {
   bool success = true;
   int iParam = 0;

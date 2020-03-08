@@ -8,7 +8,7 @@
     <param name="scanPeriod" value="$(arg scanPeriod)" />
 
     <remap from="/multi_scan_points" to="/velodyne_points" />
-    <remap from="/imu/data" to="/mynteye/imu/data_raw" />
+  <!--  <remap from="/imu/data" to="/mynteye/imu/data_raw" /> -->
   </node>
 
   <node pkg="loam_velodyne" type="laserOdometry" name="laserOdometry" output="screen" respawn="true">
@@ -17,6 +17,9 @@
 
   <node pkg="loam_velodyne" type="laserMapping" name="laserMapping" output="screen">
     <param name="scanPeriod" value="$(arg scanPeriod)" />
+
+    <!-- <remap from="/imu/data" to="/mynteye/imu/data_raw" /> -->
+
   </node>
 
   <node pkg="loam_velodyne" type="transformMaintenance" name="transformMaintenance" output="screen">
