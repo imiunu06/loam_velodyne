@@ -204,11 +204,11 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
 
 
     // jw cut the data of the person
-    /*
+
     float angleCut = std::atan2(point.z, point.x)*180/M_PI;
     if(angleCut <= -60 && angleCut >= -120)
       continue;
-    */
+
 
 
     // calculate horizontal point angle
