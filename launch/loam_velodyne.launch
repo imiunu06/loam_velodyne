@@ -1,4 +1,4 @@
-<launch>
+/<launch>
 
   <arg name="rviz" default="true" />
   <arg name="scanPeriod" default="0.1" />
