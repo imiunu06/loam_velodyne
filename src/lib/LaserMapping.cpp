@@ -44,6 +44,8 @@ LaserMapping::LaserMapping(const float& scanPeriod, const size_t& maxIterations)
 
    _aftMappedTrans.frame_id_ = "/camera_init";
    _aftMappedTrans.child_frame_id_ = "/aft_mapped";
+
+
 }
 
 
@@ -219,11 +221,22 @@ void LaserMapping::laserOdometryHandler(const nav_msgs::Odometry::ConstPtr& lase
 
 void LaserMapping::imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
 {
+  
    double roll, pitch, yaw;
    tf::Quaternion orientation;
    tf::quaternionMsgToTF(imuIn->orientation, orientation);
    tf::Matrix3x3(orientation).getRPY(roll, pitch, yaw);
    updateIMU({ fromROSTime(imuIn->header.stamp) , roll, pitch });
+
+   /*
+   double roll, pitch, yaw;
+   tf::Quaternion orientation;
+   //tf::quaternionMsgToTF(imuIn->orientation, orientation);
+
+   geometry_msgs::Quaternion geoQuat = imuIn->orientation;
+   tf::Matrix3x3(tf::Quaternion(geoQuat.y, geoQuat.z, geoQuat.x, geoQuat.w)).getRPY(roll, pitch, yaw);
+   updateIMU({ fromROSTime(imuIn->header.stamp) , roll, pitch });
+   */
 }
 
 void LaserMapping::spin()

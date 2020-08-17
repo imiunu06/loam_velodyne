@@ -77,6 +77,16 @@ private:
 
   ros::Subscriber _subLaserOdometry;    ///< (high frequency) laser odometry subscriber
   ros::Subscriber _subOdomAftMapped;    ///< (low frequency) mapping odometry subscriber
+
+  tf::StampedTransform map_2_camera_init_Trans;
+  tf::TransformBroadcaster tfBroadcasterMap2CameraInit;
+
+  tf::StampedTransform camera_2_velodyne_Trans;
+  tf::TransformBroadcaster tfBroadcasterCamera2Velodyne;
+
+  tf::StampedTransform velodyne_2_imu_Trans;
+  tf::TransformBroadcaster tfBroadcasterVelodyne2Imu;
+  
 };
 
 } // end namespace loam

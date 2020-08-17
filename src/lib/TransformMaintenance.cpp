@@ -43,6 +43,17 @@ TransformMaintenance::TransformMaintenance()
 
    _laserOdometryTrans2.frame_id_ = "/camera_init";
    _laserOdometryTrans2.child_frame_id_ = "/camera";
+
+   map_2_camera_init_Trans.frame_id_ = "/map";
+   map_2_camera_init_Trans.child_frame_id_ = "/camera_init";
+
+   camera_2_velodyne_Trans.frame_id_ = "/camera";
+   camera_2_velodyne_Trans.child_frame_id_ = "/velodyne";
+
+   velodyne_2_imu_Trans.frame_id_ = "/velodyne";
+   velodyne_2_imu_Trans.child_frame_id_ = "/mynteye_imu_frame";
+
+
 }
 
 
