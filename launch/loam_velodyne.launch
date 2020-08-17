@@ -5,7 +5,6 @@
 
   <param name="/use_sim_time" value="true" />
 
-
   <node pkg="tf" type="static_transform_publisher" name="camera_init_to_map"  args="0 0 0 0   0      1.570795 /map    /camera_init 100" />
   <node pkg="tf" type="static_transform_publisher" name="velodyne_to_camera"  args="0 0 0 -1.570795 -1.570795 0 /camera    /velodyne 100" />
   <node pkg="tf" type="static_transform_publisher" name="mynteye_imu_frame_to_velodyne"  args="0 0 0 0   0        0 /velodyne    /mynteye_imu_frame 100" />
